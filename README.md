@@ -1,2 +1,2 @@
-# triviaNightScoring
-Scoring utility for Trivia Night events
+# triviaNightScoring-api
+API Scoring utility for Trivia Night events
