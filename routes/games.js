@@ -122,8 +122,11 @@ module.exports = app => {
         const gameId = req.params.gameId
         const sqlQuery = `
             DELETE
-                FROM games
-                WHERE game_id = ${gameId}
+                r, t, g
+                FROM rounds r
+                JOIN teams t ON t.team_id = r.team_id
+                JOIN games g ON g.game_id = t.game_id
+                WHERE g.game_id = ${gameId}
         `
         try {
             await queryDatabase(sqlQuery)
