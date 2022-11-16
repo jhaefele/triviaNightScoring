@@ -1,13 +1,6 @@
 const logger = require('../logger');
 const express = require('express');
-const pool = require('../services/db');
-
-async function queryDatabase(sqlString, params) {
-    const conn = await pool.getConnection()
-    let dbQueryResult = await conn.query(sqlString, params)
-    conn.end()
-    return dbQueryResult
-}
+const {queryDatabase} = require('../services/db');
 
 module.exports = app => {
 
@@ -87,9 +80,9 @@ module.exports = app => {
         try {
             queryResult = await queryDatabase(sqlQuery)
         } catch (err) {
-            logger.error(`ERROR: Unable to get score for game ${gameId},
-                        team (id) ${teamId}, round ${roundNum}:\n\t${err}`)
-            return res.status(400).json({ error: 'Unable to get round score', })
+            logger.error(`ERROR: Unable to get scores for game ${gameId},
+                        team (id) ${teamId}:\n\t${err}`)
+            return res.status(400).json({ error: 'Unable to get round scores', })
         }
         if (queryResult.length) {
             let totalScore = 0
@@ -111,8 +104,8 @@ module.exports = app => {
             return res.status(200).json(roundScorePayload)
         } else {
             logger.error(`ERROR: Unable to get score for game ${gameId},
-                        table ${tableNum}, round ${roundNum}:\n\t${err}`)
-            return res.status(400).json({ error: 'Unable to get round score' })
+                        table ${tableNum}:\n\t${err}`)
+            return res.status(400).json({ error: 'Unable to get round scores' })
         }
     });
 

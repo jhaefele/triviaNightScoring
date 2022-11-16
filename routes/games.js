@@ -1,13 +1,6 @@
 const logger = require('../logger');
 const express = require('express');
-const pool = require('../services/db');
-
-async function queryDatabase(sqlString, params) {
-    const conn = await pool.getConnection()
-    let dbQueryResult = await conn.query(sqlString, params)
-    conn.end()
-    return dbQueryResult
-}
+const {queryDatabase} = require('../services/db');
 
 module.exports = app => {
 

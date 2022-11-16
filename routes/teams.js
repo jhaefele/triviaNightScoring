@@ -1,13 +1,6 @@
 const logger = require('../logger');
 const express = require('express');
-const pool = require('../services/db');
-
-async function queryDatabase(sqlString, params) {
-    const conn = await pool.getConnection()
-    let dbQueryResult = await conn.query(sqlString, params)
-    conn.end()
-    return dbQueryResult
-}
+const {queryDatabase} = require('../services/db');
 
 module.exports = app => {
 
@@ -89,7 +82,7 @@ module.exports = app => {
             }
         } else {
             logger.error('Unable to get teams')
-            return res.status(400).json({ error: 'Unable to get teams' })
+            return res.status(400).json({ error: `Unable to get teams - no teams found for game ${gameId}` })
         }
         teamsPayload['teams'] = teamsPayloadData
         return res.status(200).json(teamsPayload)
