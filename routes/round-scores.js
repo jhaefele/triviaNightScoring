@@ -84,7 +84,6 @@ module.exports = app => {
                 FROM rounds
                 WHERE game_id = ${gameId} AND team_id = ${teamId}
         `
-        console.log(sqlQuery)
         try {
             queryResult = await queryDatabase(sqlQuery)
         } catch (err) {
@@ -133,7 +132,6 @@ module.exports = app => {
                 FROM rounds
                 WHERE game_id = ${gameId} AND team_id = ${teamId} AND round_num = ${roundNum}
         `
-        console.log(sqlQuery)
         try {
             queryResult = await queryDatabase(sqlQuery)
         } catch (err) {
