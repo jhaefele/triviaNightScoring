@@ -9,33 +9,6 @@ async function queryDatabase(sqlString, params) {
     return dbQueryResult
 }
 
-// var router = express.Router();
-// const db = require('../services/db');
-
-// db.query('SELECT * FROM games')
-// let userResult
-// db.query('SELECT fname, lname FROM users', (err, rows, fields) => {
-//     if (err) throw err
-//     userResult = rows
-// })
-
-////////////
-//        //
-// ROUTES //
-//        //
-////////////
-
-// add-team                 // Add a table/team name to a game
-// update-prefs             // Update environment variables
-// get-game-score           // Get round scores and total game score for a given team
-// get-teams                // Get a list of all tables for current game
-// select-game              // Update env with current game-id
-// delete-game              // Remove a game
-// delete-team              // Remove a team/table
-
-
-////////////
-
 module.exports = app => {
 
     app.post('/api/games/:gameId/teams/:teamId/round-scores', async (req, res) => {
